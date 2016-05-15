@@ -1,0 +1,335 @@
+\documentclass{report}
+% pre\'ambulo
+
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,activeacute]{babel}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{url}
+
+\title{
+	{Modelo Matematico Depredador-Presa de Lotka-Volterra}\\
+	{\large Instituto Tecnológico de Estudios Superiores de la Región Carbonífera}\\
+	%{\includegraphics[scale=0.2]{graficos/logoUniversity.jpg}}
+}
+\author{Alejandro Méndez Pérez \and Rodolfo Saucedo}
+
+\begin{document}
+% cuerpo del documento
+
+\maketitle
+\newpage
+\tableofcontents
+%Seria mas como un prefacio esto no?%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Introducción}
+Se busca recrear el modelo matematico de Lotke-Volterra para aplicar los conocimientos adquiridos en Sistemas de Ecuaciones Diferenciales Lineales de Primer Orden, este documento explicara el modelo
+
+\chapter*{Intr}
+El calculo es la herramienta mas exacta con la que se cuenta para modelar el mundo que nos rodea, no predice exactamente el comportamiento de algun sistema pero se acerca con gran precision y exactitud al verdadero comportamiento. Existen diferentes tipos de sistemas para obtener un comportamiento como son los sistemas lineales son faciles de resolver analiticamente, y los sistemas no lineales estos son mas dificiles de resolver que incluso no existen matematicas para resolverlo, por esto es necesario aproximar su comportamiento convirtiendolo en un sistema lineal dentro de un determinado rango.
+
+\chapter{Modelo Depredador-Presa}
+
+el modelo lleva a la ecuacion 
+\begin{align}
+\frac{dx}{dt}= xa-bxy  \\
+\frac{dy}{dt}= cxy-dy
+\end{align}
+
+Se puede observar que es un sistema de ecuaciones diferenciales de primer orden no lineales.
+
+Para solucionar este tipo de ecuaciones primeramente se tiene que linealizar el modelo basandonos en el punto de equilibrio, esto es cuando las derivadas son 0.
+
+%\subsection*{Pero ¿Que sucede con el modelo al hacer esto?}
+\subsection*{Efecto de linealizar el sistema}
+
+La dos poblaciones de animales $x(t)$ y $y(t)$ que cohabitan el mismo ambiente y que
+posiblemente compiten por la misma comida o presa de uno u otra.
+
+ $x(t)$ podría representar el número de conejos y $y(t)$ el número de ardillas en el tiempo $t$. Así, el punto crítico del sistema $(x_w , y_w )$ especifica una población constante $x_w$ de conejos y una población constante de ardillas $y_w$ que pueden coexistir una con otra en el medio ambiente. Si $(x_0 , y_0 )$ no es un punto crítico del sistema, entonces no es posible para esa población constante de conejos $x_0$ y de ardillas $y_0$ que puedan coexistir, una o las dos deben cambiar con el tiempo.
+
+\section{Linealizando modelo}
+\subsection{Puntos criticos o de equilibrio}
+Se tiene que el punto de equilibrio se encuentra cuando sus derivadas son 0 y por lo tanto encontrarlo indica que es una solucion $(x,y)$ al sistema de ecuaciones.
+
+\begin{align}
+0= xa-bxy \label{eq:equiEDO} \\
+0= cxy-dy \label{eq:equiEDO2}
+\end{align}
+
+Podemos observar que ahora podemos obtener valores en $x$ e $y$ encontrando sus raices, por lo tanto la ecuacion \ref{eq:equiEDO} implica que
+\begin{equation}
+x(a-by)= 0
+\begin{cases}
+x=0\\
+y=\frac{a}{b}
+\end{cases}
+\end{equation}
+y que en \ref{eq:equiEDO2} son
+\begin{equation}
+y(cx-d)= 0
+\begin{cases}
+x=\frac{d}{c}\\
+y=0
+\end{cases}
+\end{equation}
+
+De esto se deduce que el sistema depredador-presa tiene dos puntos criticos en $(0,0)$ y  $(\frac{d}{c},\frac{a}{b})$.
+
+Por lo tanto de este sistema
+\begin{equation*}
+\begin{array}{c}
+x' \\
+y'
+\end{array} 
+=
+\left[
+\begin{matrix}
+a-by &-bx\\
+cy &cx-d
+\end{matrix}\right]
+\left[\begin{array}{c}
+x\\
+y
+\end{array}\right]
+\end{equation*}
+tiene la matriz jacobiana
+\begin{align*}
+J(x,y)&=
+\left[
+\begin{matrix}
+a-by &-bx\\
+cy &cx-d
+\end{matrix}\right]
+\end{align*}
+en la cual se aplicaran los puntos criticos.
+
+\subsubsection{Punto critico en $(0,0)$}
+Al aplicar punto critico
+\begin{align}
+J(0,0)&=
+\left[
+\begin{matrix}
+a &0\\
+0 &-d
+\end{matrix}\right]
+\end{align}
+podemos obtener nuestro sistema linealizado el cual quedaria de esta forma
+\begin{align}
+\frac{dx}{dt}&= ax \nonumber\\
+\frac{dy}{dt}&= -dy \label{eq:sisPC1}
+\end{align}
+
+%Pero podemos comprobar que esta no es la solucion que esperamos al ver que $\lambda$ da a denotar que es un punto silla inestable.
+
+
+\subsubsection{Punto critico en $(\frac{d}{c},\frac{a}{b})$}
+Partiendo de su matriz jacobiana
+\begin{align*}
+J(x,y)=
+\left[
+\begin{matrix}
+a-by &-bx\\
+cy &cx-d
+\end{matrix}\right]
+\end{align*}
+y ahora aplicando el punto $(\frac{d}{c},\frac{a}{b})$
+\begin{align}
+J(\frac{d}{c},\frac{a}{b})=
+\left[
+\begin{matrix}
+0 &-\frac{bd}{c}\\
+\frac{ac}{b} &0
+\end{matrix}\right]
+\end{align}
+se obtiene el siguiente sistema
+\begin{align}
+\begin{array}{ccc}
+\frac{dx}{dt}&= &-\frac{bd}{c}y \\
+\frac{dy}{dt}&= &\frac{ac}{b}x
+\end{array}\label{eq:sisPC2}
+\end{align}
+
+\section{Sistema del punto critico en $(0,0)$}
+El sistema \ref{eq:sisPC1} da una solución para $x(t)$ e $y(t)$ al aplicar Laplace la obtendremos.
+\begin{align*}
+\mathcal{L}\left\{\frac{dx}{dt} \right.&= \left. ax\right\} \\
+\mathcal{L}\left\{ \frac{dy}{dt}\right.&= \left.-dy \right\}
+\end{align*}
+Nuestra solucion esta dada por $X(s)$
+\begin{align}
+sX(s)-X(0)&=aX(s) \nonumber\\
+\left[s-a\right]X(s) &=X(0) \\
+X(s)&= \frac{X(0)}{s-a} \label{eq:xsLap}
+\end{align}
+tambien por $Y(s)$
+\begin{align}
+sY(s)-Y(0)=-dY(s) \nonumber \\
+\left[s+d\right]Y(s)=Y(0)\nonumber \\
+Y(s)=\frac{Y(0)}{s+d}
+ \label{eq:ysLap}
+\end{align}
+Los valores iniciales $X(0)$, $Y(0)$ seran reemplazados con $A$ y $B$.
+
+De las transformadas $X(s)$ e $Y(s)$ aplicamos Laplace inversa para poder obtener las soluciones en funcion de $t$.
+
+Para $x(t)$
+\begin{align}
+x(t)&=\mathcal{L}\{X(s)\} =\mathcal{L}\left\{ \frac{A}{s-a}
+\right\}\nonumber\\
+x(t)&=Ae^{at} \label{eq:xtAnPC1}
+\end{align}
+por lo tanto \ref{eq:xtAnPC1} es la funcion que define el comportamiento de las presas en cualquier tiempo.
+
+Ahora para $y(t)$
+\begin{align}
+y(t)&=\mathcal{L}\{Y(s)\} =\mathcal{L}\left\{ \frac{B}{s+d}
+\right\}\nonumber\\
+y(t)&=Be^{-dt}
+\end{align}
+
+\section{Sistema del punto critico en $(\frac{d}{c},\frac{a}{b})$}
+El sistema \ref{eq:sisPC2} se puede encontrar una solucion para $x(t)$ y $y(t)$ al aplicar Laplace 
+\begin{align*}
+\mathcal{L}\left\{ \frac{dx}{dt}\right.
+&=\left. -\frac{bd}{c}y  \right\}
+\\
+\mathcal{L}\left\{ \frac{dy}{dt}\right.
+&= \left.\frac{ac}{b}x  \right\}
+\end{align*}
+
+Y por lo tanto nuestra solucion estaria dada por
+\begin{subequations}
+\begin{align}
+[sX(s)-X(0)]&=-\frac{bd}{c}Y(s) \nonumber \\
+[X(s)-\frac{X(0)}{s}]&=-\frac{bd}{c}\frac{Y(s)}{s} \nonumber\\
+X(s)+\frac{bd}{c}\frac{Y(s)}{s}&=\frac{X(0)}{s} \label{eq:lapXs} \\
+[sY(s)-Y(0)]&=\frac{ac}{b}X(s) \nonumber \\
+[Y(s)-\frac{Y(0)}{s}]&=\frac{ac}{b}\frac{X(s)}{s} \nonumber \\
+-\frac{ac}{b}\frac{X(s)}{s}+Y(s)&=\frac{Y(0)}{s} \label{eq:lapYs}
+\end{align}
+\end{subequations}
+
+Podemos observar que este sistema puede representarse en su forma de matriz y resolverse por algun metodo matricial.
+
+\begin{equation}
+\left[\begin{matrix}
+1 &\frac{bd}{sc} \\
+-\frac{ac}{sb} &1
+\end{matrix}\right]
+\left[\begin{array}{c}
+X(s)\\
+Y(s)
+\end{array}\right]
+=
+\frac{1}{s}\left[\begin{array}{c}
+A\\
+B
+\end{array}\right]\label{eq:sistemAnLaplace}
+\end{equation}
+
+Los valores iniciales los hemos sustituido por las letras $A$ y $B$ esto es para que sea mas legible.
+
+Por lo tanto ya que tenemos el sistema matricial partimos resolviendo con el metodo de Cramer
+\subsection{Obteniendo $x(t)$}
+Se tiene \ref{eq:sistemAnLaplace} se aplicara el metodo y obtendremos
+\begin{align*}
+X(s) &= \frac{\begin{vmatrix}
+\frac{A}{s} &\frac{bd}{sc} \\
+\frac{B}{s} &1
+\end{vmatrix}}{
+\begin{vmatrix}
+1 &\frac{bd}{sc} \\
+-\frac{ac}{sb} &1
+\end{vmatrix}}
+\end{align*}
+de donde se va a resolver y simplificar hasta su termino invertible por lo tanto
+\begin{align}
+X(s)&=
+\frac{\frac{A}{s}-{\frac{bdB}{s^2c}}}{
+1+\frac{abcd}{s^2bc}}
+=
+\frac{\frac{scA-bdB}{s^2c}}{
+\frac{s^2bc+abcd}{s^2bc}}
+=
+\frac{s^2bc(scA-bdB)}{s^2c(s^2bc+abcd)}\nonumber
+\\X(s)&=
+\frac{sbc^2A-bcdB}{s^2bc+abcd} 
+=\frac{sbc^2A-bcdB}{s^2+ad} 
+\end{align}
+Ya que se tiene la funcion de $X(s)$ y se puede aplicar la inversa de Laplace
+\begin{align*}
+x(t)=\mathcal{L}^{-1}\left\{X(s) \right\}
+=\mathcal{L}^{-1}\left\{  \frac{sbc^2A-bcdB}{s^2+ad}   \right\}
+\end{align*}
+que por linealidad se tiene
+\begin{align}
+x(t)
+&=bc^2A\mathcal{L}^{-1}\left\{  \frac{s}{s^2+ad} \right\}-bcdB\mathcal{L}^{-1}\left\{
+\frac{1}{s^2+ad} \right\} \nonumber
+\\x(t)&=bc^2A\cos(t\sqrt{ad})-\frac{bcdB}{\sqrt{ad}}\sin(t\sqrt{ad}) \label{eq:xtAn}
+\end{align}
+de donde \ref{eq:xtAn} es la funcion que determina el comportamiento en las presas en cualquier tiempo $t$.
+
+\subsection{Obteniendo $y(t)$}
+Ahora obtendremos $y(t)$ a partir del sistema matricial de \ref{eq:sistemAnLaplace} de donde podemos obtenerla usando el metodo de Cramer.
+\begin{equation}
+Y(s)=
+\frac{
+\begin{vmatrix}
+1 &\frac{A}{s} \\
+-\frac{ac}{sb} &\frac{B}{s}
+\end{vmatrix}}{
+\begin{vmatrix}
+1 &\frac{bd}{sc}\\
+-\frac{ac}{sb} &1
+\end{vmatrix}}
+\end{equation}
+Ahora resolviendolo hasta su termino invertible se obtendria
+\begin{align}
+Y(s)&=\frac{\frac{B}{s}+\frac{acA}{s^2b}}{
+1+\frac{abdc}{s^2bc}}
+=
+\frac{\frac{sbB-acA}{s^2b}}{
+\frac{s^2bc+abcd}{s^2bc}}
+\nonumber\\Y(s)&=
+\frac{s^2bc(sdB-acA)}{s^2b(s^2bc+abcd)}
+=
+\frac{scdB-ac^2A}{s^2bc+abcd}
+\nonumber\\Y(s)&=
+\frac{scdB-ac^2A}{s^2+ad} \label{eq:YsLaplace}
+\end{align}
+
+Ahora podemos obtener $y(t)$ transformando a $Y(s)$ aplicando la inversa de laplace
+\begin{align*}
+y(t)&=\mathcal{L}^-1\left\{ Y(s) \right\}
+\end{align*}
+de donde sustituimos por el resultado de \ref{eq:YsLaplace} 
+\begin{align*}
+y(t)&=\mathcal{L}^-1\left\{ \frac{scdB-ac^2A}{s^2+ad} \right\}
+\end{align*}
+que por linealidad podemos hacer esto
+\begin{align*}
+y(t)&=cdB\mathcal{L}^-1\left\{ \frac{s}{s^2+ad} \right\}
+-ac^2A\mathcal{L}^-1\left\{ \frac{1}{s^2+ad} \right\}
+\end{align*}
+y entonces procedemos a transformar
+\begin{align}
+y(t)&=cdB\cos(t\sqrt{ad})
+-\frac{ac^2A}{\sqrt{ad}}\sin(t\sqrt{ad}) \label{eq:ytAn}
+\end{align}
+y esta seria la funcion que puede representar el comportamiento de las especies en cualquier tiempo.
+
+\subsection{Soluciones del modelo}
+
+Las funciones que describen nuestro modelo en el punto critico son
+\begin{align*}
+y(t)&=cdB\cos(t\sqrt{ad})
+-\frac{ac^2A}{\sqrt{ad}}\sin(t\sqrt{ad}) \\
+x(t)&=bc^2A\cos(t\sqrt{ad})-\frac{bcdB}{\sqrt{ad}}\sin(t\sqrt{ad})
+\end{align*}
+
+\chapter{Solucion Numerica del modelo}
+
+\end{document}
