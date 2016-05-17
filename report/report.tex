@@ -31,7 +31,8 @@ El calculo es la herramienta mas exacta con la que se cuenta para modelar el mun
 
 \chapter{Modelo Depredador-Presa}
 
-el modelo lleva a la ecuacion 
+El modelo Depredador presa parte de un par de ecuaciones diferenciales de primer orden no lineales que busca representar el crecimiento de dos especies que interactuan dentro del mismo habitad.
+Este modelo fue propuesto primeramente en 1925 por Alfred James Lotka, y en 1926 fue nuevamente propuesto por Vito Volkerra; se considera que las ecuaciones fueron propuestas de forma independiente.
 \begin{align}
 \frac{dx}{dt}= xa-bxy  \\
 \frac{dy}{dt}= cxy-dy
@@ -41,6 +42,13 @@ Se puede observar que es un sistema de ecuaciones diferenciales de primer orden 
 
 Para solucionar este tipo de ecuaciones primeramente se tiene que linealizar el modelo basandonos en el punto de equilibrio, esto es cuando las derivadas son 0.
 
+\subsection{Explicacion de las ecuaciones}
+
+Para toda hipotesis debemos de tener en cuenta algunas condiciones a las que sera expuesto nuestro modelo, para este caso tenemos cuatro condiciones principales:\\
+-La especie depredadora se alimenta solo de la especie presa, mientras que ésta se nutre de un recurso que se encuentra en el hábitat en grandes cantidades.\\
+-Las dos poblaciones eran homogéneas, es decir, los parámetros de edad y sexo no cuentan.\\
+-Las características son las mismas en todo el hábitat.\\
+-La probabilidad de interacción entre ambas especies es la misma.\\
 %\subsection*{Pero ¿Que sucede con el modelo al hacer esto?}
 \subsection*{Efecto de linealizar el sistema}
 
